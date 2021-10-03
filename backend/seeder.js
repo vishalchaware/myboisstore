@@ -9,7 +9,6 @@ import Order from './models/orderModel.js';
 import connectDB from './config/db.js';
 
 dotenv.config();
-
 connectDB();
 
 const importData = async () => {
@@ -17,17 +16,12 @@ const importData = async () => {
 		await Order.deleteMany();
 		await Product.deleteMany();
 		await User.deleteMany();
-
 		const createdUsers = await User.insertMany(users);
-
 		const adminUser = createdUsers[0]._id;
-
 		const sampleProducts = products.map((product) => {
 			return { ...product, user: adminUser };
 		});
-
 		await Product.insertMany(sampleProducts);
-
 		console.log('Data Imported!'.green.inverse);
 		process.exit();
 	} catch (error) {
@@ -41,7 +35,6 @@ const destroyData = async () => {
 		await Order.deleteMany();
 		await Product.deleteMany();
 		await User.deleteMany();
-
 		console.log('Data Destroyed!'.red.inverse);
 		process.exit();
 	} catch (error) {
