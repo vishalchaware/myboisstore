@@ -148,7 +148,6 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
 		const config = {
 			headers: {
-				'Content-Type': 'application/json',
 				Authorization: `Bearer ${userInfo.token}`,
 			},
 		};
@@ -219,7 +218,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.delete(`/api/users/${id}`, config);
+		await axios.delete(`/api/users/${id}`, config);
 
 		dispatch({ type: USER_DELETE_SUCCESS });
 	} catch (error) {
